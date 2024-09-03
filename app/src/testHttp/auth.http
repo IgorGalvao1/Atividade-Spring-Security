@@ -1,0 +1,10 @@
+@baseUrl = https://8080-igorgalvao1-correcaotar-pj6nj554am5.ws-us115.gitpod.io
+
+###
+POST {{baseUrl}}/auth
+Content-Type: application/json
+
+{
+    "nomeDeUsuario": "usuario",
+    "senha": "user"
+}
