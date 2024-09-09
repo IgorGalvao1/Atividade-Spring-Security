@@ -7,13 +7,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tarefas")
-public class Tarefa {
+@Table(name = "livros")
+public class Livro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String descricao;
-    private boolean concluido;
+    private String titulo;
+    private int anoPublicacao;
 
     public long getId() {
         return id;
@@ -21,16 +21,19 @@ public class Tarefa {
     public void setId(long id) {
         this.id = id;
     }
-    public String getDescricao() {
-        return descricao;
+    
+    public String getTitulo() {
+        return titulo;
     }
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
-    public boolean isConcluido() {
-        return concluido;
+    
+    
+    public int getAnoPublicacao() {
+        return anoPublicacao;
     }
-    public void setConcluido(boolean concluido) {
-        this.concluido = concluido;
-    }  
+    public void setAnoPublicacao(int anoPublicacao) {
+        this.anoPublicacao = anoPublicacao;
+    }
 }

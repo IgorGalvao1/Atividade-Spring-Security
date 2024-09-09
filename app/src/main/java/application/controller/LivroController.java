@@ -14,60 +14,61 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import application.model.Tarefa;
-import application.repository.TarefaRepository;
+import application.model.Livro;
+import application.repository.LivroRepository;
 
 @RestController
-@RequestMapping("/tarefas")
-public class TarefaController {
+@RequestMapping("/livros")
+public class LivroController {
     @Autowired
-    private TarefaRepository tarefaRepo;
+    private LivroRepository livroRepo;
 
     @GetMapping
-    public Iterable<Tarefa> getAll() {
-        return tarefaRepo.findAll();
+    public Iterable<Livro> getAll() {
+        return livroRepo.findAll();
     }
 
     @PostMapping
-    public Tarefa post(@RequestBody Tarefa tarefa) {
-        return tarefaRepo.save(tarefa);
+    public Livro post(@RequestBody Livro livro) {
+        return livroRepo.save(livro);
     }
 
     @GetMapping("/{id}")
-    public Tarefa getOne(@PathVariable long id) {
-        Optional<Tarefa> resultado = tarefaRepo.findById(id);
+    public Livro getOne(@PathVariable long id) {
+        Optional<Livro> resultado = livroRepo.findById(id);
         if(resultado.isEmpty()) {
             throw new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "Tarefa não encontrada"
+                HttpStatus.NOT_FOUND, "Livro não encontrado"
             );
         }
         return resultado.get();
     }
 
     @PutMapping("/{id}")
-    public Tarefa put(@PathVariable long id, @RequestBody Tarefa novosDados){
-        Optional<Tarefa> resultado = tarefaRepo.findById(id);
+    public Livro put(@PathVariable long id, @RequestBody Livro novosDados){
+        Optional<Livro> resultado = livroRepo.findById(id);
 
         if(resultado.isEmpty()) {
             throw new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "Tarefa não encontrada"
+                HttpStatus.NOT_FOUND, "Livro não encontrado"
             );
         }
 
-        resultado.get().setDescricao(novosDados.getDescricao());
-        resultado.get().setConcluido(novosDados.isConcluido());
+        Livro livro = resultado.get();
+        livro.setTitulo(novosDados.getTitulo());
+        livro.setAnoPublicacao(novosDados.getAnoPublicacao());
 
-        return tarefaRepo.save(resultado.get());
+        return livroRepo.save(livro);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable long id) {
-        if(!tarefaRepo.existsById(id)) {
+        if(!livroRepo.existsById(id)) {
             throw new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "Tarefa não encontrada"
+                HttpStatus.NOT_FOUND, "Livro não encontrado"
             );
         }
 
-        tarefaRepo.deleteById(id);
+        livroRepo.deleteById(id);
     }
 }

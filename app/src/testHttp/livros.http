@@ -1,0 +1,33 @@
+@baseUrl = https://8080-igorgalvao1-atividadesp-xp5ki0rbra6.ws-us116.gitpod.io
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBUEkgVGFyZWZhcyIsInN1YiI6InVzdWFyaW8iLCJleHAiOjE3MjU5MjExODV9.l4shvyqF6MksFOYnvlxEPy8DWExdwT9GwXCoeYvsb_0
+###
+GET {{baseUrl}}/livros
+Authorization: Bearer {{token}}
+
+###
+POST {{baseUrl}}/livros
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "titulo": "O Senhor dos Anéis",
+    "anoPublicacao": 1954
+}
+
+###
+GET {{baseUrl}}/livros/4
+Authorization: Bearer {{token}}
+
+###
+PUT {{baseUrl}}/livros/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "titulo": "O Hobbit",
+    "anoPublicacao": 1937
+}
+
+###
+DELETE {{baseUrl}}/livros/1
+Authorization: Bearer {{token}}
